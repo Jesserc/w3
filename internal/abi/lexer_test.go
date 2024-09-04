@@ -5,9 +5,9 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/Jesserc/w3/internal"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"github.com/lmittmann/w3/internal"
 )
 
 func TestLexer(t *testing.T) {

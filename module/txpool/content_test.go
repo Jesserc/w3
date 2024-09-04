@@ -4,11 +4,11 @@ import (
 	"math/big"
 	"testing"
 
+	"github.com/Jesserc/w3"
+	"github.com/Jesserc/w3/module/txpool"
+	"github.com/Jesserc/w3/rpctest"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/module/txpool"
-	"github.com/lmittmann/w3/rpctest"
 )
 
 func TestContent(t *testing.T) {

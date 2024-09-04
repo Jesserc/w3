@@ -4,10 +4,10 @@ go 1.22
 
 require (
 	github.com/ethereum/go-ethereum v1.14.8
-	github.com/lmittmann/w3 v0.0.0
+	github.com/Jesserc/w3 v0.0.0
 )
 
-replace github.com/lmittmann/w3 => ../
+replace github.com/Jesserc/w3 => ../
 
 require (
 	github.com/Microsoft/go-winio v0.6.2 // indirect

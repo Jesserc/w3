@@ -13,8 +13,8 @@ import (
 	"reflect"
 	"strings"
 
+	"github.com/Jesserc/w3/w3types"
 	"github.com/ethereum/go-ethereum/rpc"
-	"github.com/lmittmann/w3/w3types"
 	"golang.org/x/time/rate"
 )
 

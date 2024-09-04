@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/Jesserc/w3"
+	"github.com/Jesserc/w3/w3types"
+	"github.com/Jesserc/w3/w3vm"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/w3types"
-	"github.com/lmittmann/w3/w3vm"
 )
 
 func TestWETHBalanceSlot(t *testing.T) {

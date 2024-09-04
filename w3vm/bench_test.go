@@ -5,11 +5,11 @@ import (
 	"math/big"
 	"testing"
 
+	"github.com/Jesserc/w3"
+	"github.com/Jesserc/w3/module/eth"
+	"github.com/Jesserc/w3/w3types"
+	"github.com/Jesserc/w3/w3vm"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/module/eth"
-	"github.com/lmittmann/w3/w3types"
-	"github.com/lmittmann/w3/w3vm"
 )
 
 // BenchmarkVM runs [VM.ApplyTx] on the given block range and returns the

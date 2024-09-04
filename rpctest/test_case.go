@@ -5,12 +5,12 @@ import (
 	"math/big"
 	"testing"
 
+	"github.com/Jesserc/w3"
+	"github.com/Jesserc/w3/internal"
+	"github.com/Jesserc/w3/w3types"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/internal"
-	"github.com/lmittmann/w3/w3types"
 )
 
 type TestCase[T any] struct {

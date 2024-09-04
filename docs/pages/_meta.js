@@ -69,13 +69,13 @@ export default {
     examples: {
         title: 'Examples',
         type: 'page',
-        href: 'https://github.com/lmittmann/w3/tree/main/examples',
+        href: 'https://github.com/Jesserc/w3/tree/main/examples',
         newWindow: true
     },
     godoc: {
         title: 'GoDoc',
         type: 'page',
-        href: 'https://pkg.go.dev/github.com/lmittmann/w3#section-documentation',
+        href: 'https://pkg.go.dev/github.com/Jesserc/w3#section-documentation',
         newWindow: true
     },
 }

@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/Jesserc/w3"
+	"github.com/Jesserc/w3/module/eth"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/module/eth"
 )
 
 var (

@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/Jesserc/w3"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/lmittmann/w3"
 )
 
 func ExampleI() {

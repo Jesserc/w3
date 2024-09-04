@@ -7,10 +7,10 @@ import (
 	"math/big"
 	"sync/atomic"
 
+	"github.com/Jesserc/w3/internal/crypto"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/lmittmann/w3/internal/crypto"
 )
 
 type State map[common.Address]*Account

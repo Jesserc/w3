@@ -4,9 +4,9 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/module/eth"
-	"github.com/lmittmann/w3/rpctest"
+	"github.com/Jesserc/w3"
+	"github.com/Jesserc/w3/module/eth"
+	"github.com/Jesserc/w3/rpctest"
 )
 
 func TestBalance(t *testing.T) {

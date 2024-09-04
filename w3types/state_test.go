@@ -3,10 +3,10 @@ package w3types_test
 import (
 	"testing"
 
+	"github.com/Jesserc/w3/w3types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"github.com/lmittmann/w3/w3types"
 )
 
 func TestStateMerge(t *testing.T) {
@@ -65,7 +65,7 @@ func TestStateMerge(t *testing.T) {
 			Want:     w3types.State{common.Address{}: {Storage: w3types.Storage{common.Hash{}: common.Hash{0x02}}}},
 		},
 
-		// https://github.com/lmittmann/w3/pull/176
+		// https://github.com/Jesserc/w3/pull/176
 		{
 			Name:     "empty-code",
 			StateDst: w3types.State{common.Address{}: {Code: []byte{}}},

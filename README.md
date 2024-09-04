@@ -1,34 +1,31 @@
 # `w3`: Enhanced Ethereum Integration for Go
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/lmittmann/w3.svg)](https://pkg.go.dev/github.com/lmittmann/w3)
-[![Go Report Card](https://goreportcard.com/badge/github.com/lmittmann/w3)](https://goreportcard.com/report/github.com/lmittmann/w3)
+[![Go Reference](https://pkg.go.dev/badge/github.com/Jesserc/w3.svg)](https://pkg.go.dev/github.com/Jesserc/w3)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Jesserc/w3)](https://goreportcard.com/report/github.com/Jesserc/w3)
 [![Coverage Status](https://coveralls.io/repos/github/lmittmann/w3/badge.svg?branch=main)](https://coveralls.io/github/lmittmann/w3?branch=main)
-[![Latest Release](https://img.shields.io/github/v/release/lmittmann/w3)](https://github.com/lmittmann/w3/releases)
+[![Latest Release](https://img.shields.io/github/v/release/lmittmann/w3)](https://github.com/Jesserc/w3/releases)
 <img src="https://w3.cool/gopher.png" align="right" alt="W3 Gopher" width="158" height="224">
 
 `w3` is your toolbelt for integrating with Ethereum in Go. Closely linked to `go‑ethereum`, it provides an ergonomic wrapper for working with **RPC**, **ABI's**, and the **EVM**.
 
-
 ```
-go get github.com/lmittmann/w3
+go get github.com/Jesserc/w3
 ```
-
 
 ## At a Glance
 
-* Use `w3.Client` to connect to an RPC endpoint. The client features batch request support for up to **80x faster requests** and easy extendibility. [learn&nbsp;more&nbsp;↗](#rpc-client)
-* Use `w3vm.VM` to simulate EVM execution with optional tracing and Mainnet state forking, or test Smart Contracts. [learn&nbsp;more&nbsp;↗](#vm)
-* Use `w3.Func` and `w3.Event` to create ABI bindings from Solidity function and event signatures. [learn&nbsp;more&nbsp;↗](#abi-bindings)
-* Use `w3.A`, `w3.H`, and many other utility functions to parse addresses, hashes, and other common types from strings. [learn&nbsp;more&nbsp;↗](#utils)
-
+- Use `w3.Client` to connect to an RPC endpoint. The client features batch request support for up to **80x faster requests** and easy extendibility. [learn&nbsp;more&nbsp;↗](#rpc-client)
+- Use `w3vm.VM` to simulate EVM execution with optional tracing and Mainnet state forking, or test Smart Contracts. [learn&nbsp;more&nbsp;↗](#vm)
+- Use `w3.Func` and `w3.Event` to create ABI bindings from Solidity function and event signatures. [learn&nbsp;more&nbsp;↗](#abi-bindings)
+- Use `w3.A`, `w3.H`, and many other utility functions to parse addresses, hashes, and other common types from strings. [learn&nbsp;more&nbsp;↗](#utils)
 
 ## Getting Started
 
 ### RPC Client
 
-[`w3.Client`](https://pkg.go.dev/github.com/lmittmann/w3#Client) is a batch request focused RPC client that can be used to connect to an Ethereum node via HTTP, WebSocket, or IPC. Its modular API allows to create custom RPC method integrations that can be used alongside the common methods implemented by this package.
+[`w3.Client`](https://pkg.go.dev/github.com/Jesserc/w3#Client) is a batch request focused RPC client that can be used to connect to an Ethereum node via HTTP, WebSocket, or IPC. Its modular API allows to create custom RPC method integrations that can be used alongside the common methods implemented by this package.
 
-**Example:** Batch Request ([Playground](https://pkg.go.dev/github.com/lmittmann/w3#example-Client))
+**Example:** Batch Request ([Playground](https://pkg.go.dev/github.com/Jesserc/w3#example-Client))
 
 ```go
 // 1. Connect to an RPC endpoint
@@ -52,14 +49,17 @@ if err := client.Call(
 ```
 
 > [!NOTE]
+>
 > #### Why send batch requests?
+>
 > Most of the time you need to call multiple RPC methods to get the data you need. When you make separate requests per RPC call you need a single round trip to the server for each call. This can be slow, especially for remote endpoints. Batching multiple RPC calls into a single request only requires a single round trip, and speeds up RPC calls significantly.
 
 #### Error Handling
 
-If one ore more calls in a batch request fail, `Client.Call` returns an error of type [`w3.CallErrors`](https://pkg.go.dev/github.com/lmittmann/w3#CallErrors).
+If one ore more calls in a batch request fail, `Client.Call` returns an error of type [`w3.CallErrors`](https://pkg.go.dev/github.com/Jesserc/w3#CallErrors).
 
-**Example:** Check which RPC calls failed in a batch request ([Playground](https://pkg.go.dev/github.com/lmittmann/w3#example-CallErrors))
+**Example:** Check which RPC calls failed in a batch request ([Playground](https://pkg.go.dev/github.com/Jesserc/w3#example-CallErrors))
+
 ```go
 var errs w3.CallErrors
 if err := client.Call(rpcCalls...); errors.As(err, &errs) {
@@ -70,14 +70,15 @@ if err := client.Call(rpcCalls...); errors.As(err, &errs) {
 ```
 
 #### Learn More
-* List of supported [**RPC methods**](#rpc-methods)
-* Learn how to create [**custom RPC method bindings**](#custom-rpc-method-bindings)
+
+- List of supported [**RPC methods**](#rpc-methods)
+- Learn how to create [**custom RPC method bindings**](#custom-rpc-method-bindings)
 
 ### VM
 
-[`w3vm.VM`](https://pkg.go.dev/github.com/lmittmann/w3/w3vm#VM) is a high-level EVM environment with a simple but powerful API to simulate EVM execution, test Smart Contracts, or trace transactions. It supports Mainnet state forking via RPC and state caching for faster testing.
+[`w3vm.VM`](https://pkg.go.dev/github.com/Jesserc/w3/w3vm#VM) is a high-level EVM environment with a simple but powerful API to simulate EVM execution, test Smart Contracts, or trace transactions. It supports Mainnet state forking via RPC and state caching for faster testing.
 
-**Example:** Simulate an Uniswap v3 swap ([Playground](https://pkg.go.dev/github.com/lmittmann/w3/w3vm#example-VM))
+**Example:** Simulate an Uniswap v3 swap ([Playground](https://pkg.go.dev/github.com/Jesserc/w3/w3vm#example-VM))
 
 ```go
 // 1. Create a VM that forks the Mainnet state from the latest block,
@@ -124,13 +125,13 @@ if err := receipt.DecodeReturns(&amountOut); err != nil {
 
 ABI bindings in `w3` are specified for individual functions using Solidity syntax and are usable for any contract that supports that function.
 
-**Example:** ABI binding for the ERC20 `balanceOf` function ([Playground](https://pkg.go.dev/github.com/lmittmann/w3#example-NewFunc-BalanceOf))
+**Example:** ABI binding for the ERC20 `balanceOf` function ([Playground](https://pkg.go.dev/github.com/Jesserc/w3#example-NewFunc-BalanceOf))
 
 ```go
 funcBalanceOf := w3.MustNewFunc("balanceOf(address)", "uint256")
 ```
 
-**Example:** ABI binding for the Uniswap v4 `swap` function ([Playground](https://pkg.go.dev/github.com/lmittmann/w3#example-NewFunc-UniswapV4Swap))
+**Example:** ABI binding for the Uniswap v4 `swap` function ([Playground](https://pkg.go.dev/github.com/Jesserc/w3#example-NewFunc-UniswapV4Swap))
 
 ```go
 funcSwap := w3.MustNewFunc(`swap(
@@ -140,11 +141,11 @@ funcSwap := w3.MustNewFunc(`swap(
 )`, "int256 delta")
 ```
 
-A [`Func`](https://pkg.go.dev/github.com/lmittmann/w3#Func) can be used to
+A [`Func`](https://pkg.go.dev/github.com/Jesserc/w3#Func) can be used to
 
-* encode arguments to the contracts input data ([`Func.EncodeArgs`](https://pkg.go.dev/github.com/lmittmann/w3#Func.EncodeArgs)),
-* decode arguments from the contracts input data ([`Func.DecodeArgs`](https://pkg.go.dev/github.com/lmittmann/w3#Func.DecodeArgs)), and
-* decode returns form the contracts output data ([`Func.DecodeReturns`](https://pkg.go.dev/github.com/lmittmann/w3#Func.DecodeReturns)).
+- encode arguments to the contracts input data ([`Func.EncodeArgs`](https://pkg.go.dev/github.com/Jesserc/w3#Func.EncodeArgs)),
+- decode arguments from the contracts input data ([`Func.DecodeArgs`](https://pkg.go.dev/github.com/Jesserc/w3#Func.DecodeArgs)), and
+- decode returns form the contracts output data ([`Func.DecodeReturns`](https://pkg.go.dev/github.com/Jesserc/w3#Func.DecodeReturns)).
 
 ### Utils
 
@@ -159,75 +160,73 @@ amount := w3.I("12.34 ether")
 
 Use [go-ethereum/common](https://pkg.go.dev/github.com/ethereum/go-ethereum/common) to parse strings that may not be valid instead.
 
-
 ## RPC Methods
 
-List of supported RPC methods for [`w3.Client`](https://pkg.go.dev/github.com/lmittmann/w3#Client).
+List of supported RPC methods for [`w3.Client`](https://pkg.go.dev/github.com/Jesserc/w3#Client).
 
-### [`eth`](https://pkg.go.dev/github.com/lmittmann/w3/module/eth)
+### [`eth`](https://pkg.go.dev/github.com/Jesserc/w3/module/eth)
 
-| Method                                    | Go Code
-| :---------------------------------------- | :-------
-| `eth_blockNumber`                         | `eth.BlockNumber().Returns(blockNumber **big.Int)`
-| `eth_call`                                | `eth.Call(msg *w3types.Message, blockNumber *big.Int, overrides w3types.State).Returns(output *[]byte)`<br>`eth.CallFunc(contract common.Address, f w3types.Func, args ...any).Returns(returns ...any)`
-| `eth_chainId`                             | `eth.ChainID().Returns(chainID *uint64)`
-| `eth_createAccessList`                    | `eth.AccessList(msg *w3types.Message, blockNumber *big.Int).Returns(resp **eth.AccessListResponse)`
-| `eth_estimateGas`                         | `eth.EstimateGas(msg *w3types.Message, blockNumber *big.Int).Returns(gas *uint64)`
-| `eth_gasPrice`                            | `eth.GasPrice().Returns(gasPrice **big.Int)`
-| `eth_maxPriorityFeePerGas`                | `eth.GasTipCap().Returns(gasTipCap **big.Int)`
-| `eth_getBalance`                          | `eth.Balance(addr common.Address, blockNumber *big.Int).Returns(balance **big.Int)`
-| `eth_getBlockByHash`                      | `eth.BlockByHash(hash common.Hash).Returns(block *types.Block)`<br>`eth.HeaderByHash(hash common.Hash).Returns(header **types.Header)`
-| `eth_getBlockByNumber`                    | `eth.BlockByNumber(number *big.Int).Returns(block *types.Block)`<br>`eth.HeaderByNumber(number *big.Int).Returns(header **types.Header)`
-| `eth_getBlockReceipts`                    | `eth.BlockReceipts(blockNumber *big.Int).Returns(receipts *types.Receipts)`
-| `eth_getBlockTransactionCountByHash`      | `eth.BlockTxCountByHash(hash common.Hash).Returns(count *uint)`
-| `eth_getBlockTransactionCountByNumber`    | `eth.BlockTxCountByNumber(number *big.Int).Returns(count *uint)`
-| `eth_getCode`                             | `eth.Code(addr common.Address, blockNumber *big.Int).Returns(code *[]byte)`
-| `eth_getLogs`                             | `eth.Logs(q ethereum.FilterQuery).Returns(logs *[]types.Log)`
-| `eth_getStorageAt`                        | `eth.StorageAt(addr common.Address, slot common.Hash, blockNumber *big.Int).Returns(storage *common.Hash)`
-| `eth_getTransactionByHash`                | `eth.Tx(hash common.Hash).Returns(tx **types.Transaction)`
-| `eth_getTransactionByBlockHashAndIndex`   | `eth.TxByBlockHashAndIndex(blockHash common.Hash, index uint).Returns(tx **types.Transaction)`
-| `eth_getTransactionByBlockNumberAndIndex` | `eth.TxByBlockNumberAndIndex(blockNumber *big.Int, index uint).Returns(tx **types.Transaction)`
-| `eth_getTransactionCount`                 | `eth.Nonce(addr common.Address, blockNumber *big.Int).Returns(nonce *uint)`
-| `eth_getTransactionReceipt`               | `eth.TxReceipt(txHash common.Hash).Returns(receipt **types.Receipt)`
-| `eth_sendRawTransaction`                  | `eth.SendRawTx(rawTx []byte).Returns(hash *common.Hash)`<br>`eth.SendTx(tx *types.Transaction).Returns(hash *common.Hash)`
-| `eth_getUncleByBlockHashAndIndex`         | `eth.UncleByBlockHashAndIndex(hash common.Hash, index uint).Returns(uncle **types.Header)`
-| `eth_getUncleByBlockNumberAndIndex`       | `eth.UncleByBlockNumberAndIndex(number *big.Int, index uint).Returns(uncle **types.Header)`
-| `eth_getUncleCountByBlockHash`            | `eth.UncleCountByBlockHash(hash common.Hash).Returns(count *uint)`
-| `eth_getUncleCountByBlockNumber`          | `eth.UncleCountByBlockNumber(number *big.Int).Returns(count *uint)`
+| Method                                    | Go Code                                                                                                                                                                                                 |
+| :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `eth_blockNumber`                         | `eth.BlockNumber().Returns(blockNumber **big.Int)`                                                                                                                                                      |
+| `eth_call`                                | `eth.Call(msg *w3types.Message, blockNumber *big.Int, overrides w3types.State).Returns(output *[]byte)`<br>`eth.CallFunc(contract common.Address, f w3types.Func, args ...any).Returns(returns ...any)` |
+| `eth_chainId`                             | `eth.ChainID().Returns(chainID *uint64)`                                                                                                                                                                |
+| `eth_createAccessList`                    | `eth.AccessList(msg *w3types.Message, blockNumber *big.Int).Returns(resp **eth.AccessListResponse)`                                                                                                     |
+| `eth_estimateGas`                         | `eth.EstimateGas(msg *w3types.Message, blockNumber *big.Int).Returns(gas *uint64)`                                                                                                                      |
+| `eth_gasPrice`                            | `eth.GasPrice().Returns(gasPrice **big.Int)`                                                                                                                                                            |
+| `eth_maxPriorityFeePerGas`                | `eth.GasTipCap().Returns(gasTipCap **big.Int)`                                                                                                                                                          |
+| `eth_getBalance`                          | `eth.Balance(addr common.Address, blockNumber *big.Int).Returns(balance **big.Int)`                                                                                                                     |
+| `eth_getBlockByHash`                      | `eth.BlockByHash(hash common.Hash).Returns(block *types.Block)`<br>`eth.HeaderByHash(hash common.Hash).Returns(header **types.Header)`                                                                  |
+| `eth_getBlockByNumber`                    | `eth.BlockByNumber(number *big.Int).Returns(block *types.Block)`<br>`eth.HeaderByNumber(number *big.Int).Returns(header **types.Header)`                                                                |
+| `eth_getBlockReceipts`                    | `eth.BlockReceipts(blockNumber *big.Int).Returns(receipts *types.Receipts)`                                                                                                                             |
+| `eth_getBlockTransactionCountByHash`      | `eth.BlockTxCountByHash(hash common.Hash).Returns(count *uint)`                                                                                                                                         |
+| `eth_getBlockTransactionCountByNumber`    | `eth.BlockTxCountByNumber(number *big.Int).Returns(count *uint)`                                                                                                                                        |
+| `eth_getCode`                             | `eth.Code(addr common.Address, blockNumber *big.Int).Returns(code *[]byte)`                                                                                                                             |
+| `eth_getLogs`                             | `eth.Logs(q ethereum.FilterQuery).Returns(logs *[]types.Log)`                                                                                                                                           |
+| `eth_getStorageAt`                        | `eth.StorageAt(addr common.Address, slot common.Hash, blockNumber *big.Int).Returns(storage *common.Hash)`                                                                                              |
+| `eth_getTransactionByHash`                | `eth.Tx(hash common.Hash).Returns(tx **types.Transaction)`                                                                                                                                              |
+| `eth_getTransactionByBlockHashAndIndex`   | `eth.TxByBlockHashAndIndex(blockHash common.Hash, index uint).Returns(tx **types.Transaction)`                                                                                                          |
+| `eth_getTransactionByBlockNumberAndIndex` | `eth.TxByBlockNumberAndIndex(blockNumber *big.Int, index uint).Returns(tx **types.Transaction)`                                                                                                         |
+| `eth_getTransactionCount`                 | `eth.Nonce(addr common.Address, blockNumber *big.Int).Returns(nonce *uint)`                                                                                                                             |
+| `eth_getTransactionReceipt`               | `eth.TxReceipt(txHash common.Hash).Returns(receipt **types.Receipt)`                                                                                                                                    |
+| `eth_sendRawTransaction`                  | `eth.SendRawTx(rawTx []byte).Returns(hash *common.Hash)`<br>`eth.SendTx(tx *types.Transaction).Returns(hash *common.Hash)`                                                                              |
+| `eth_getUncleByBlockHashAndIndex`         | `eth.UncleByBlockHashAndIndex(hash common.Hash, index uint).Returns(uncle **types.Header)`                                                                                                              |
+| `eth_getUncleByBlockNumberAndIndex`       | `eth.UncleByBlockNumberAndIndex(number *big.Int, index uint).Returns(uncle **types.Header)`                                                                                                             |
+| `eth_getUncleCountByBlockHash`            | `eth.UncleCountByBlockHash(hash common.Hash).Returns(count *uint)`                                                                                                                                      |
+| `eth_getUncleCountByBlockNumber`          | `eth.UncleCountByBlockNumber(number *big.Int).Returns(count *uint)`                                                                                                                                     |
 
-### [`debug`](https://pkg.go.dev/github.com/lmittmann/w3/module/debug)
+### [`debug`](https://pkg.go.dev/github.com/Jesserc/w3/module/debug)
 
-| Method                   | Go Code
-| :----------------------- | :-------
-| `debug_traceCall`        | `debug.TraceCall(msg *w3types.Message, blockNumber *big.Int, config *debug.TraceConfig).Returns(trace **debug.Trace)`<br>`debug.CallTraceCall(msg *w3types.Message, blockNumber *big.Int, overrides w3types.State).Returns(trace **debug.CallTrace)`
-| `debug_traceTransaction` | `debug.TraceTx(txHash common.Hash, config *debug.TraceConfig).Returns(trace **debug.Trace)`<br>`debug.CallTraceTx(txHash common.Hash, overrides w3types.State).Returns(trace **debug.CallTrace)`
+| Method                   | Go Code                                                                                                                                                                                                                                              |
+| :----------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `debug_traceCall`        | `debug.TraceCall(msg *w3types.Message, blockNumber *big.Int, config *debug.TraceConfig).Returns(trace **debug.Trace)`<br>`debug.CallTraceCall(msg *w3types.Message, blockNumber *big.Int, overrides w3types.State).Returns(trace **debug.CallTrace)` |
+| `debug_traceTransaction` | `debug.TraceTx(txHash common.Hash, config *debug.TraceConfig).Returns(trace **debug.Trace)`<br>`debug.CallTraceTx(txHash common.Hash, overrides w3types.State).Returns(trace **debug.CallTrace)`                                                     |
 
-### [`txpool`](https://pkg.go.dev/github.com/lmittmann/w3/module/txpool)
+### [`txpool`](https://pkg.go.dev/github.com/Jesserc/w3/module/txpool)
 
-| Method               | Go Code
-| :--------------------| :-------
-| `txpool_content`     | `txpool.Content().Returns(resp **txpool.ContentResponse)`
-| `txpool_contentFrom` | `txpool.ContentFrom(addr common.Address).Returns(resp **txpool.ContentFromResponse)`
-| `txpool_status`      | `txpool.Status().Returns(resp **txpool.StatusResponse)`
+| Method               | Go Code                                                                              |
+| :------------------- | :----------------------------------------------------------------------------------- |
+| `txpool_content`     | `txpool.Content().Returns(resp **txpool.ContentResponse)`                            |
+| `txpool_contentFrom` | `txpool.ContentFrom(addr common.Address).Returns(resp **txpool.ContentFromResponse)` |
+| `txpool_status`      | `txpool.Status().Returns(resp **txpool.StatusResponse)`                              |
 
-### [`web3`](https://pkg.go.dev/github.com/lmittmann/w3/module/web3)
+### [`web3`](https://pkg.go.dev/github.com/Jesserc/w3/module/web3)
 
-| Method               | Go Code
-| :------------------- | :-------
-| `web3_clientVersion` | `web3.ClientVersion().Returns(clientVersion *string)`
+| Method               | Go Code                                               |
+| :------------------- | :---------------------------------------------------- |
+| `web3_clientVersion` | `web3.ClientVersion().Returns(clientVersion *string)` |
 
 ### Third Party RPC Method Packages
 
-| Package                                                                  | Description
-| :----------------------------------------------------------------------- | :-----------
-| [github.com/lmittmann/flashbots](https://github.com/lmittmann/flashbots) | Package `flashbots` implements RPC API bindings for the Flashbots relay and mev-geth.
-
+| Package                                                                  | Description                                                                           |
+| :----------------------------------------------------------------------- | :------------------------------------------------------------------------------------ |
+| [github.com/lmittmann/flashbots](https://github.com/lmittmann/flashbots) | Package `flashbots` implements RPC API bindings for the Flashbots relay and mev-geth. |
 
 ## Custom RPC Method Bindings
 
-Custom RPC method bindings can be created by implementing the [`w3types.RPCCaller`](https://pkg.go.dev/github.com/lmittmann/w3/w3types#RPCCaller) interface.
+Custom RPC method bindings can be created by implementing the [`w3types.RPCCaller`](https://pkg.go.dev/github.com/Jesserc/w3/w3types#RPCCaller) interface.
 
-**Example:** RPC binding for the Otterscan `ots_getTransactionBySenderAndNonce` method ([Playground](https://pkg.go.dev/github.com/lmittmann/w3/w3types#example-RPCCaller-GetTransactionBySenderAndNonce))
+**Example:** RPC binding for the Otterscan `ots_getTransactionBySenderAndNonce` method ([Playground](https://pkg.go.dev/github.com/Jesserc/w3/w3types#example-RPCCaller-GetTransactionBySenderAndNonce))
 
 ```go
 // TxBySenderAndNonceFactory requests the senders transaction hash by the nonce.

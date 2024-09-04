@@ -11,6 +11,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/Jesserc/w3"
+	"github.com/Jesserc/w3/internal"
+	"github.com/Jesserc/w3/module/eth"
+	"github.com/Jesserc/w3/rpctest"
+	"github.com/Jesserc/w3/w3types"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -19,11 +24,6 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/google/go-cmp/cmp"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/internal"
-	"github.com/lmittmann/w3/module/eth"
-	"github.com/lmittmann/w3/rpctest"
-	"github.com/lmittmann/w3/w3types"
 	"golang.org/x/time/rate"
 )
 

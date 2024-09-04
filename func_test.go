@@ -8,12 +8,12 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/Jesserc/w3"
+	"github.com/Jesserc/w3/internal"
+	"github.com/Jesserc/w3/w3types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/internal"
-	"github.com/lmittmann/w3/w3types"
 )
 
 func ExampleNewFunc_balanceOf() {
@@ -236,7 +236,7 @@ func TestFuncEncodeArgs(t *testing.T) {
 			},
 			Want: w3.B("0x533d6285000000000000000000000000000000000000000000000000000000000000dead000000000000000000000000000000000000000000000000000000000000beef"),
 		},
-		{ // https://github.com/lmittmann/w3/issues/35
+		{ // https://github.com/Jesserc/w3/issues/35
 			Func: w3.MustNewFunc("test(((address to)[] recipients) param)", ""),
 			Args: []any{
 				&tupleIssue35{Recipients: []struct {
@@ -318,14 +318,14 @@ func TestFuncDecodeArgs(t *testing.T) {
 			}},
 		},
 		{
-			// https://github.com/lmittmann/w3/issues/67
+			// https://github.com/Jesserc/w3/issues/67
 			Func:     w3.MustNewFunc("test((address, uint256))", ""),
 			Input:    w3.B("0xba71720c000000000000000000000000000000000000000000000000000000000000c0fe000000000000000000000000000000000000000000000000000000000000002a"),
 			Args:     []any{nil},
 			WantArgs: []any{nil},
 		},
 		{
-			// https://github.com/lmittmann/w3/issues/67
+			// https://github.com/Jesserc/w3/issues/67
 			Func:  w3.MustNewFunc("test((address, uint256))", ""),
 			Input: w3.B("0xba71720c000000000000000000000000000000000000000000000000000000000000c0fe000000000000000000000000000000000000000000000000000000000000002a"),
 			Args:  []any{new(tuple)},
@@ -335,7 +335,7 @@ func TestFuncDecodeArgs(t *testing.T) {
 			}},
 		},
 		{
-			// https://github.com/lmittmann/w3/issues/67
+			// https://github.com/Jesserc/w3/issues/67
 			Func:  w3.MustNewFunc("test((address, (address, uint256)))", ""),
 			Input: w3.B("0x1a68b84c000000000000000000000000000000000000000000000000000000000000c0fe000000000000000000000000000000000000000000000000000000000000dead000000000000000000000000000000000000000000000000000000000000002a"),
 			Args:  []any{new(tupleNested)},
@@ -365,7 +365,7 @@ func TestFuncDecodeArgs(t *testing.T) {
 				Arg1: big.NewInt(42),
 			}},
 		},
-		{ // https://github.com/lmittmann/w3/issues/22
+		{ // https://github.com/Jesserc/w3/issues/22
 			Func:    w3.MustNewFunc("transfer(address recipient, uint256 amount)", "bool success"),
 			Input:   w3.B("0x"),
 			Args:    []any{new(common.Address), new(big.Int)},
@@ -422,7 +422,7 @@ func TestFuncDecodeArgs(t *testing.T) {
 				&[2]uint64{0xdead, 0xbeef},
 			},
 		},
-		{ // https://github.com/lmittmann/w3/issues/35
+		{ // https://github.com/Jesserc/w3/issues/35
 			Func:  w3.MustNewFunc("test(((address to)[] recipients) param)", ""),
 			Input: w3.B("0xf61d1a2a00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000200000000000000000000000011111111111111111111111111111111111111110000000000000000000000002222222222222222222222222222222222222222"),
 			Args:  []any{new(tupleIssue35)},
@@ -505,7 +505,7 @@ func TestFuncDecodeReturns(t *testing.T) {
 			Returns:     []any{&[]byte{}},
 			WantReturns: []any{&[]byte{1, 2, 3}},
 		},
-		{ // https://github.com/lmittmann/w3/issues/25
+		{ // https://github.com/Jesserc/w3/issues/25
 			Func:    w3.MustNewFunc("test()", "(address arg0, uint256 arg1)"),
 			Output:  w3.B("0x000000000000000000000000000000000000000000000000000000000000c0fe000000000000000000000000000000000000000000000000000000000000002a"),
 			Returns: []any{new(tuple)},

@@ -3,9 +3,9 @@ package w3vm
 import (
 	"errors"
 
+	"github.com/Jesserc/w3/w3types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/lmittmann/w3/w3types"
 )
 
 var ErrMissingFunc = errors.New("missing function")

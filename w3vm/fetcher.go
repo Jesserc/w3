@@ -12,15 +12,15 @@ import (
 	"sync/atomic"
 	"testing"
 
+	"github.com/Jesserc/w3"
+	"github.com/Jesserc/w3/internal/crypto"
+	w3hexutil "github.com/Jesserc/w3/internal/hexutil"
+	"github.com/Jesserc/w3/module/eth"
+	"github.com/Jesserc/w3/w3types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/holiman/uint256"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/internal/crypto"
-	w3hexutil "github.com/lmittmann/w3/internal/hexutil"
-	"github.com/lmittmann/w3/module/eth"
-	"github.com/lmittmann/w3/w3types"
 )
 
 // Fetcher is the interface to access account state of a blockchain.

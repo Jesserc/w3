@@ -6,11 +6,11 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/Jesserc/w3"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"github.com/lmittmann/w3"
 )
 
 func ExampleEvent_DecodeArgs() {
@@ -187,7 +187,7 @@ func TestEventDecodeArgs(t *testing.T) {
 				big.NewInt(42),
 			},
 		},
-		{ // https://github.com/lmittmann/w3/issues/15
+		{ // https://github.com/Jesserc/w3/issues/15
 			Event: w3.MustNewEvent("NameRegistered(string name, bytes32 indexed label, address indexed owner, uint cost, uint expires)"),
 			Log: &types.Log{
 				Address: w3.A("0x283Af0B28c62C092C9727F1Ee09c02CA627EB7F5"),

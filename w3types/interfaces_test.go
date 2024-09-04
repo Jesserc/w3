@@ -3,10 +3,10 @@ package w3types_test
 import (
 	"fmt"
 
+	"github.com/Jesserc/w3"
+	"github.com/Jesserc/w3/w3types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/rpc"
-	"github.com/lmittmann/w3"
-	"github.com/lmittmann/w3/w3types"
 )
 
 // TxBySenderAndNonceFactory requests the senders transaction hash by the nonce.

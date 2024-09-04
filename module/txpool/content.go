@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"sort"
 
+	"github.com/Jesserc/w3/internal/module"
+	"github.com/Jesserc/w3/w3types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/lmittmann/w3/internal/module"
-	"github.com/lmittmann/w3/w3types"
 )
 
 // Content requests the pending and queued transactions in the transaction pool.

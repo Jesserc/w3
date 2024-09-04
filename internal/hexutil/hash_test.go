@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/Jesserc/w3/internal/hexutil"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/lmittmann/w3/internal/hexutil"
 )
 
 var hashTests = []struct {

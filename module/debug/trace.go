@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/Jesserc/w3/internal/module"
+	"github.com/Jesserc/w3/w3types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/holiman/uint256"
-	"github.com/lmittmann/w3/internal/module"
-	"github.com/lmittmann/w3/w3types"
 )
 
 // TraceCall requests the trace of the given message.
@@ -20,7 +20,7 @@ func TraceCall(msg *w3types.Message, blockNumber *big.Int, config *TraceConfig) 
 	}
 	// Ensure the tracer is set
 	if config.Tracer == "" {
-		config.Tracer = "callTracer"  // Use a default tracer if none is specified
+		config.Tracer = "callTracer" // Use a default tracer if none is specified
 	}
 	return module.NewFactory(
 		"debug_traceCall",
@@ -41,7 +41,7 @@ func TraceTx(txHash common.Hash, config *TraceConfig) w3types.RPCCallerFactory[*
 }
 
 type TraceConfig struct {
-	Tracer        string `json:"tracer,omitempty"`
+	Tracer        string        `json:"tracer,omitempty"`
 	Overrides     w3types.State // Override account state
 	EnableStack   bool          // Enable stack capture
 	EnableMemory  bool          // Enable memory capture
