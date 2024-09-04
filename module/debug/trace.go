@@ -41,17 +41,21 @@ func TraceTx(txHash common.Hash, config *TraceConfig) w3types.RPCCallerFactory[*
 }
 
 type TraceConfig struct {
-	Tracer        string        `json:"tracer,omitempty"`
-	Overrides     w3types.State // Override account state
-	EnableStack   bool          // Enable stack capture
-	EnableMemory  bool          // Enable memory capture
-	EnableStorage bool          // Enable storage capture
-	Limit         uint64        // Maximum number of StructLog's to capture (all if zero)
+	Tracer         string        `json:"tracer,omitempty"`
+	TracerConfig   interface{}   `json:"tracerConfig,omitempty"`
+	Overrides      w3types.State `json:"stateOverrides,omitempty"`
+	EnableStack    bool          `json:"enableStack,omitempty"`
+	EnableMemory   bool          `json:"enableMemory,omitempty"`
+	EnableStorage  bool          `json:"enableStorage,omitempty"`
+	EnableReturnData bool        `json:"enableReturnData,omitempty"`
+	Limit          uint64        `json:"limit,omitempty"`
 }
 
 // MarshalJSON implements the [json.Marshaler].
 func (c *TraceConfig) MarshalJSON() ([]byte, error) {
 	type config struct {
+		Tracer           string        `json:"tracer,omitempty"`
+		TracerConfig     interface{}   `json:"tracerConfig,omitempty"`
 		Overrides        w3types.State `json:"stateOverrides,omitempty"`
 		DisableStorage   bool          `json:"disableStorage,omitempty"`
 		DisableStack     bool          `json:"disableStack,omitempty"`
@@ -61,11 +65,13 @@ func (c *TraceConfig) MarshalJSON() ([]byte, error) {
 	}
 
 	return json.Marshal(config{
+		Tracer:           c.Tracer,
+		TracerConfig:     c.TracerConfig,
 		Overrides:        c.Overrides,
 		DisableStorage:   !c.EnableStorage,
 		DisableStack:     !c.EnableStack,
 		EnableMemory:     c.EnableMemory,
-		EnableReturnData: true,
+		EnableReturnData: c.EnableReturnData,
 		Limit:            c.Limit,
 	})
 }
