@@ -18,6 +18,10 @@ func TraceCall(msg *w3types.Message, blockNumber *big.Int, config *TraceConfig) 
 	if config == nil {
 		config = &TraceConfig{}
 	}
+	// Ensure the tracer is set
+	if config.Tracer == "" {
+		config.Tracer = "callTracer"  // Use a default tracer if none is specified
+	}
 	return module.NewFactory(
 		"debug_traceCall",
 		[]any{msg, module.BlockNumberArg(blockNumber), config},
@@ -37,6 +41,7 @@ func TraceTx(txHash common.Hash, config *TraceConfig) w3types.RPCCallerFactory[*
 }
 
 type TraceConfig struct {
+	Tracer        string `json:"tracer,omitempty"`
 	Overrides     w3types.State // Override account state
 	EnableStack   bool          // Enable stack capture
 	EnableMemory  bool          // Enable memory capture
